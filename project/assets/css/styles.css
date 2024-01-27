@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+body {
+  font-family: "Lato", sans-serif;
+  position: relative;
+  background-color: #333333;
+  color: #fff;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background-color: #ff00ff; /* Cambia esto al color que desees para la capa de superposición */
+  background-size: 20px 20px; /* Tamaño del patrón de fondo */
+  opacity: 0.2; /* Opacidad de la capa de superposición */
+  filter: blur(100px); /* Desenfoque de la capa de superposición */
+  z-index: -10;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+form {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+fieldset {
+    margin-bottom: 32px;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+legend, h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+label {
+    color: #fff;
+}
+
+/* #vistaPrevia {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #fff;
+} */

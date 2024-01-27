@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Generador de Currículum</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="container">
+      <h1 class="text-center mb-4">Generador de Currículum</h1>
+
+      <form id="cvForm">
+        <!-- Sección de Información Personal -->
+        <fieldset>
+          <legend>Información Personal</legend>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="nombreCompleto">Nombre Completo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombreCompleto"
+                placeholder="Rubén Cruz"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="telefono">Teléfono</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="telefono"
+                placeholder="8126532767"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="correo">Correo Electrónico</label>
+              <input
+                type="email"
+                class="form-control"
+                id="correo"
+                placeholder="email@dominio.com"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="paginaWeb">Página Web</label>
+              <input
+                type="url"
+                class="form-control"
+                id="paginaWeb"
+                placeholder="https://www.youtube.com"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ubicacion">Ubicación</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ubicacion"
+                placeholder="Nuevo León"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Sección de Habilidades Técnicas -->
+        <div class="form-group">
+          <h2>Habilidades Técnicas</h2>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="habilidadesTecnicas"
+              placeholder="HTML, CSS, JavaScript"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                class="btn btn-success"
+                onclick="agregarValor('habilidadesTecnicas', 'habilidadesTecnicasLista')"
+              >
+                <i class="bi bi-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+          <ul id="habilidadesTecnicasLista"></ul>
+        </div>
+
+        <!--  Sección de Cualidades Generales (Opcional) -->
+        <div class="form-group">
+          <h2>Cualidades Generales</h2>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="cualidadesGenerales"
+              placeholder="Trabajo en equipo, Comunicación, Creatividad"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                class="btn btn-success"
+                onclick="agregarValor('cualidadesGenerales', 'cualidadesGeneralesLista')"
+              >
+                <i class="bi bi-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+          <ul id="cualidadesGeneralesLista"></ul>
+        </div>
+
+        <!-- Modal de Edición -->
+        <div
+          class="modal fade"
+          id="modalEdicion"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="modalEdicionLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background-color: #222" class="modal-content">
+              <section class="modal-header">
+                <h5 class="modal-title" id="modalEdicionLabel">Editar Valor</h5>
+              </section>
+              <section class="modal-body">
+                <input type="text" class="form-control" id="nuevoValor" />
+              </section>
+              <section class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="guardarEdicion()"
+                >
+                  Guardar Cambios
+                </button>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Advertencia -->
+        <div
+          class="modal fade"
+          id="modalAdvertencia"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="modalAdvertenciaLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background-color: #222" class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalAdvertenciaLabel">
+                  Advertencia
+                </h5>
+              </div>
+              <div class="modal-body">
+                <p>
+                  Por favor, complete al menos un campo antes de generar el
+                  currículum.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                >
+                  Entendido
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de Puesto Solicitado -->
+        <fieldset>
+          <legend>Puesto Solicitado</legend>
+          <div class="form-group">
+            <label for="puestoSolicitado">Puesto Solicitado</label>
+            <input
+              type="text"
+              class="form-control"
+              id="puestoSolicitado"
+              placeholder="Desarrollador Web"
+            />
+          </div>
+        </fieldset>
+
+        <!-- Sección de Sobre Mí -->
+        <fieldset>
+          <legend>Sobre Mí</legend>
+          <div class="form-group">
+            <label for="sobreMi">Sobre Mí</label>
+            <input
+              type="text"
+              class="form-control"
+              id="sobreMi"
+              placeholder="Breve descripción sobre ti"
+            />
+          </div>
+        </fieldset>
+
+        <!-- Sección de Experiencia Laboral -->
+        <fieldset>
+          <legend>Experiencia Laboral</legend>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="fechaInicioLaboral">Fecha de Inicio</label>
+              <input type="date" class="form-control" id="fechaInicioLaboral" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="fechaFinLaboral">Fecha de Fin</label>
+              <input type="date" class="form-control" id="fechaFinLaboral" />
+            </div>
+            <div class="form-group col-md-5">
+              <label for="empresaLaboral">Empresa</label>
+              <input
+                type="text"
+                class="form-control"
+                id="empresaLaboral"
+                placeholder="Nombre de la empresa"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="puestoLaboral">Puesto</label>
+              <input
+                type="text"
+                class="form-control"
+                id="puestoLaboral"
+                placeholder="Puesto desempeñado"
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="descripcionLaboral">Descripción</label>
+              <input
+                type="text"
+                class="form-control"
+                id="descripcionLaboral"
+                placeholder="Descripción de las responsabilidades y logros"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Sección de Educación -->
+        <fieldset>
+          <legend>Educación</legend>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="fechaInicioEducacion">Fecha de Inicio</label>
+              <input type="date" class="form-control" id="fechaInicioEducacion" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="fechaFinEducacion">Fecha de Fin</label>
+              <input type="date" class="form-control" id="fechaFinEducacion" />
+            </div>
+            <div class="form-group col-md-5">
+              <label for="institucionEducacion">Institución</label>
+              <input
+                type="text"
+                class="form-control"
+                id="institucionEducacion"
+                placeholder="Nombre de la institución"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="gradoEducacion">Grado</label>
+              <input
+                type="text"
+                class="form-control"
+                id="gradoEducacion"
+                placeholder="Grado obtenido"
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="descripcionEducacion">Descripción</label>
+              <input
+                type="text"
+                class="form-control"
+                id="descripcionEducacion"
+                placeholder="Descripción de la educación obtenida"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="generarCurriculum()"
+        >
+          Generar Currículum
+        </button>
+      </form>
+
+      <hr class="border">
+
+      <!-- Vista Previa del Currículum -->
+      <div class="mt-5">
+        <h2>Vista Previa del Currículum</h2>
+        <div id="vistaPrevia"></div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script> -->
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
